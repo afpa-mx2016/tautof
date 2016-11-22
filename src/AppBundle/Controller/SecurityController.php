@@ -10,9 +10,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\UserFormType;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class SecurityController extends Controller
 {
@@ -48,7 +50,6 @@ class SecurityController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
@@ -56,16 +57,37 @@ class SecurityController extends Controller
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
-            $em->flush();
+            try{
+                $em->flush();
+                
+                 // ... do any other work - like sending them an email, etc
+                // maybe set a "flash" success message for the user
+                 $this->addFlash(
+                    'success',
+                    'coooool account created!'
+                );
+                 
+                 //authenticate
+                 $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+                $this->get('security.token_storage')->setToken($token);
+                $this->get('session')->set('_security_main', serialize($token));
+                
+                 //TODO redirect to correct route
+                return $this->redirectToRoute('homepage');
+                
+                
+            } catch (UniqueConstraintViolationException $ex) {
+                // maybe set a "flash" success message for the user
+                $this->addFlash(
+                   'warning',
+                   'username already exist, please choose a new one'
+               );
+               
+             
+            }
+            
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
-             $this->addFlash(
-                'notice',
-                'coooool account created!'
-            );
-             //TODO redirect to correct route
-            return $this->redirectToRoute('advert_search');
+           
         }
         
         

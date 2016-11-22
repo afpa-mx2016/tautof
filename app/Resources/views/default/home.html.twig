@@ -16,6 +16,7 @@
      <div class="form-group">
         <label class="control-label" for="model">Model:</label>
         <select class="form-control" id="model-list" name="model">
+            <option value=""></option>
              {% for model in models %}
                 <option value="{{model.id}}" {% if selected_model_id== model.id%} selected {% endif %}>{{model.name}}</option>
             {% endfor %}
