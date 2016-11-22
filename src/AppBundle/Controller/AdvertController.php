@@ -34,7 +34,7 @@ class AdvertController extends Controller
     }
 
     /**
-     * Creates a new advert entity.
+     * search adverts
      *
      * @Route("/search", name="advert_search")
      * @Method({"GET"})
@@ -75,8 +75,9 @@ class AdvertController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            //TODO FAKE USER!!!! //need to take it from session
-            $user = $em->getRepository('AppBundle:User')->find(2);
+
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+            //$user = $em->getRepository('AppBundle:User')->find(2);
             //var_dump($advert);
             $advert->setUser($user);
             $em->persist($advert);
@@ -109,8 +110,7 @@ class AdvertController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            //TODO FAKE USER!!!!
-            $user = $em->getRepository('AppBundle:User')->find(2);
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             //var_dump($advert);
             $advert->setUser($user);
             $em->persist($advert);

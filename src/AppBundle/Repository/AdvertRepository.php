@@ -16,6 +16,7 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
     public function search($makeId, $modelId){
         
         
+        
         $query = $this->createQueryBuilder('a');
 
         if (!empty($modelId)){

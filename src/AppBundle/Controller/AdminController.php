@@ -19,9 +19,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  * @author lionel
  */
 class AdminController extends Controller{
-    //put your code here
+
     
      /**
+      *see security config, admin is protected
      * @Route("/admin")
      */
     public function adminAction()

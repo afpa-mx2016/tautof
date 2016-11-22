@@ -15,13 +15,29 @@ class DefaultController extends Controller
     {
         
         $em = $this->getDoctrine()->getManager();
-
         $makes = $em->getRepository('AppBundle:Make')->findAll();
         
         
-        // replace this example code with whatever you need
-        return $this->render('default/index-vjson.html.twig', [
-            'makes' => $makes
+        $makeId = $request->get('make');
+        $modelId = $request->get('model');
+        
+        $adverts = NULL;
+        if (!empty($makeId) || !empty($modelId)){
+            $adverts = $em->getRepository('AppBundle:Advert')->search($makeId, $modelId);
+        }
+        
+        $models = NULL;
+        if (!empty($makeId)){
+            $models = $em->getRepository('AppBundle:Model')->findBy(array('make'=> $makeId));
+        }
+        
+     
+        return $this->render('default/home.html.twig', [
+            'makes' => $makes,
+            'models' => $models,
+            'adverts' => $adverts,
+            'selected_make_id' => $makeId,
+            'selected_model_id' => $modelId
         ]);
     }
 }

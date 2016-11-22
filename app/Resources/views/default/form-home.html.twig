@@ -1,21 +1,21 @@
-{% extends 'base.html.twig' %}
 
-{% block body %}
     <div id="wrapper">
         <div id="container">
             <header id="search-form">
             <form method="GET" action="{{ path('advert_search') }}">
-                <label for="make">Marque:</label>
-                <select id="make-list" name="make">
-                    {% for make in makes %}
-                        <option value="{{make.id}}">{{make.name}}</option>
-                    {% endfor %}
-                </select>
-                <div>
-                    <label for="model">Modèle:</label>
-                    <select id="model-list" name="model" disabled=""></select>
+                <div class="form-group">
+                    <label class="control-label" for="make">Marque:</label>
+                    <select class="form-control" id="make-list" name="make">
+                        {% for make in makes %}
+                            <option value="{{make.id}}">{{make.name}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
-                <input type="submit" value="rechercher"/>
+                 <div class="form-group">
+                    <label class="control-label" for="model">Modèle:</label>
+                    <select class="form-control" id="model-list" name="model" disabled=""></select>
+                </div>
+                <input type="submit" value="rechercher" class="btn btn-primary"/>
             </form>
 
             </header>

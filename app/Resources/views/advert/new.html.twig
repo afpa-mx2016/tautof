@@ -1,19 +1,14 @@
-{% extends app.request.xmlHttpRequest ? 'base.html.twig' : 'empty.html.twig' %}
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 {% block body %}
     <h1>Advert creation</h1>
 
     {{ form_start(form) }}
-        {{ form_row(form.make) }}    {# <select id="meetup_sport" ... #}
-        {{ form_row(form.model) }} {# <select id="meetup_position" ... #}
+        {{ form_row(form.make) }}    
+        {{ form_row(form.model) }} 
 
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('advert_index') }}">Back to the list</a>
-        </li>
-    </ul>
     <script>
         var $maker = document.getElementById('appbundle_advert_make');
         var $models = document.getElementById('appbundle_advert_model');
