@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Adverts list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Cost</th>
+                <th>Km</th>
+                <th>Descr</th>
+                <th>Pic1</th>
+                <th>Pic2</th>
+                <th>Pic3</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for advert in adverts %}
+            <tr>
+                <td><a href="{{ path('advert_show', { 'id': advert.id }) }}">{{ advert.cost }}</a></td>
+                <td>{{ advert.km }}</td>
+                <td>{{ advert.descr }}</td>
+                <td>{{ advert.pic1 }}</td>
+                <td>{{ advert.pic2 }}</td>
+                <td>{{ advert.pic3 }}</td>
+                <td>{{ advert.title }}</td>
+                <td>{{ advert.year }}</td>
+                <td>{{ advert.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('advert_show', { 'id': advert.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('advert_edit', { 'id': advert.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}

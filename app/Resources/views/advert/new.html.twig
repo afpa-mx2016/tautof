@@ -1,0 +1,45 @@
+{% extends app.request.xmlHttpRequest ? 'base.html.twig' : 'empty.html.twig' %}
+
+{% block body %}
+    <h1>Advert creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.make) }}    {# <select id="meetup_sport" ... #}
+        {{ form_row(form.model) }} {# <select id="meetup_position" ... #}
+
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('advert_index') }}">Back to the list</a>
+        </li>
+    </ul>
+    <script>
+        var $maker = document.getElementById('appbundle_advert_make');
+        var $models = document.getElementById('appbundle_advert_model');
+        var $form = document.querySelector('form[name="appbundle_advert"]');
+        var parser = new DOMParser();
+        
+        $maker.onchange = function(){
+            var xhr = new XMLHttpRequest();
+            var formData = new FormData();
+            formData.append($maker.getAttribute('name'), $maker.options[$maker.selectedIndex].value);
+            
+            xhr.open($form.getAttribute('method'), $form.getAttribute('action'), true);
+            xhr.onload = function (e) {
+                if (xhr.readyState === 4) {
+                    var doc = parser.parseFromString(xhr.responseText, "text/html");
+                    var new_models = doc.getElementById('appbundle_advert_model');
+                    $models.innerHTML = new_models.innerHTML;
+                    //$models.parentNode.replaceChild($models, new_models);
+                   
+                }
+            };
+            xhr.onerror = function (e) {
+                console.error(xhr.statusText);
+            };
+            xhr.send(formData);
+        };
+        
+        </script>
+{% endblock %}

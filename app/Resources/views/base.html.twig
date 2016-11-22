@@ -1,0 +1,41 @@
+{% for flash_message in app.session.flashBag.get('notice') %}
+    <div class="flash-notice">
+        {{ flash_message }}
+    </div>
+{% endfor %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Tautof!{% endblock %}</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <header class="row">
+            <div class="logo">
+            
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ path('homepage') }}">Home</a></li>
+                    <li></li>
+                </ul>
+            </nav>
+            <div> 
+                {% if app.user %}
+                    Hi! {{ app.user.username }} ,<a href="{{ path('logout') }}">logout</a>
+                {% else %}
+                    <a href="{{ path('login') }}">sign in</a> || <a href="{{ path('user_registration') }}">register</a>
+                {% endif %}
+            </div>
+        </header>
+        
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

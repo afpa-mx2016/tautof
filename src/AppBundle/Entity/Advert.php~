@@ -1,0 +1,118 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Advert
+ *
+ * @ORM\Table(name="advert", indexes={@ORM\Index(name="join_utilisateur", columns={"user_id"}), @ORM\Index(name="id_couleur", columns={"color_id"}), @ORM\Index(name="id_marque", columns={"model_id"})})
+ * @ORM\Entity
+ */
+class Advert
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cost", type="integer", nullable=false)
+     */
+    private $cost;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="km", type="integer", nullable=false)
+     */
+    private $km;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descr", type="text", length=65535, nullable=false)
+     */
+    private $descr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pic1", type="string", length=150, nullable=false)
+     */
+    private $pic1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pic2", type="string", length=150, nullable=true)
+     */
+    private $pic2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pic3", type="string", length=150, nullable=true)
+     */
+    private $pic3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=150, nullable=false)
+     */
+    private $title;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="year", type="integer", nullable=false)
+     */
+    private $year;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $id;
+
+    /**
+     * @var \AppBundle\Entity\Color
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Color")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="color_id", referencedColumnName="id")
+     * })
+     */
+    private $color;
+
+    /**
+     * @var \AppBundle\Entity\Model
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Model")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="model_id", referencedColumnName="id")
+     * })
+     */
+    private $model;
+
+    /**
+     * @var \AppBundle\Entity\User
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
+
+
+}
+

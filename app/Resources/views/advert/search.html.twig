@@ -1,0 +1,35 @@
+<form method="GET" action="{{ path('advert_search') }}">
+    <label for="make">Marque:</label>
+    <select id="make_list" name="make">
+        {% for make in makes %}
+            <option value="{{make.id}}">{{make.name}}</option>
+        {% endfor %}
+    </select>
+    <select id="model_list" name="model"></select>
+</form>
+    
+<script>
+        var url = '{{ path('model_form_list') }}'
+        var $maker = document.getElementById('make_list');
+        var $models = document.getElementById('model_list');
+
+       
+        $maker.onchange = function(){
+            var xhr = new XMLHttpRequest();
+            var selectedMakeId = $maker.options[$maker.selectedIndex].value;
+            var data = new FormData();
+            data.append( 'make_id', selectedMakeId);
+            xhr.open('GET', url + '?make_id=' + selectedMakeId, true);
+            xhr.onload = function (e) {
+                if (xhr.readyState === 4) {;
+                    $models.innerHTML = xhr.responseText;
+                 
+                }
+            };
+            xhr.onerror = function (e) {
+                console.error(xhr.statusText);
+            };
+            xhr.send(data);
+        };
+        
+</script>

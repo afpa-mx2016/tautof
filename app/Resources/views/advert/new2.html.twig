@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Advert creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.make) }}    
+        {{ form_row(form.model) }} 
+
+    {{ form_end(form) }}
+
+
+    <script>
+        var url = '{{ path('model_form_list') }}'
+        var $maker = document.getElementById('appbundle_advert_make');
+        var $models = document.getElementById('appbundle_advert_model');
+        //var $form = document.querySelector('form[name="appbundle_advert"]');
+        var parser = new DOMParser();
+        
+        $maker.onchange = function(){
+            var xhr = new XMLHttpRequest();
+            var selectedMakeId = $maker.options[$maker.selectedIndex].value;
+            var data = new FormData();
+            data.append( 'make_id', selectedMakeId);
+            xhr.open('GET', url + '?make_id=' + selectedMakeId, true);
+            xhr.onload = function (e) {
+                if (xhr.readyState === 4) {
+                    //var doc = parser.parseFromString(xhr.responseText, "text/html");
+                    
+                    //var new_models = doc.getElementById('appbundle_advert_model');
+                    $models.innerHTML = xhr.responseText;
+                    //$models.parentNode.replaceChild($models, new_models);
+                   
+                }
+            };
+            xhr.onerror = function (e) {
+                console.error(xhr.statusText);
+            };
+            xhr.send(data);
+        };
+        
+        </script>
+{% endblock %}
