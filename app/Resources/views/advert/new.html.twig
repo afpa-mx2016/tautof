@@ -3,12 +3,13 @@
 
 {% block body %}
     <h1>Advert creation</h1>
-
+    <div class="col-md-6">
     {{ form_start(form) }}
         {{ form_row(form.make) }}    
         {{ form_row(form.model) }} 
 
     {{ form_end(form) }}
+    </div>
     <script>
         var $maker = document.getElementById('appbundle_advert_make');
         var $models = document.getElementById('appbundle_advert_model');
