@@ -28,40 +28,14 @@
 </form>
        
 <script>
-    var url = '{{ path('model_json_list') }}';
+    var url = '{{ path('homepage') }}';
     var $maker = document.getElementById('make-list');
-    var $models = document.getElementById('model-list');
-
 
     $maker.onchange = function(){
-        var xhr = new XMLHttpRequest();
-        var selectedMakeId = $maker.options[$maker.selectedIndex].value;
-        var data = new FormData();
-        data.append( 'make_id', selectedMakeId);
-        xhr.open('GET', url + '?make_id=' + selectedMakeId, true);
-        xhr.onload = function (e) {
-            if (xhr.readyState === 4) {
-
-
-                var data = JSON.parse(xhr.responseText);
-                var html = '<option value="">Please select</option>';
-
-                var models = data.models;
-                for (var i in models){
-                    html += '<option value=' + models[i].id + '>'+ models[i].name +'</option>';
-                }
-                //clear current list
-                $models.innerHTML =html;
-
-               // $models.innerHTML = xhr.responseText;
-                $models.disabled = false;
-
-            }
-        };
-        xhr.onerror = function (e) {
-            console.error(xhr.statusText);
-        };
-        xhr.send(data);
+        if (this.value > 0){
+            location.href = url + '?make=' + this.value;
+        }
+      
     };
 </script>
     

@@ -42,9 +42,13 @@
             {% block body %}{% endblock %}
         </div>
         <script>
-            var s = document.getElementById('alert-box').style;
-            s.opacity = 1;
-            (function fade(){(s.opacity-=.1)<0?s.display="none":setTimeout(fade,800)})();
+            var alertBox = document.getElementById('alert-box');
+            if (alertBox){
+                 var s = alertBox.style;
+                 s.opacity = 1;
+                (function fade(){(s.opacity-=.1)<0?s.display="none":setTimeout(fade,800)})();
+            }
+           
         </script>
         {% block javascripts %}{% endblock %}
     </body>
