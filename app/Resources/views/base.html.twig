@@ -13,7 +13,7 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
               <div class="navbar-header">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{ path('homepage') }}">
                   Tautof!
                 </a>
               </div>
@@ -37,6 +37,7 @@
                {% for type, flashes in app.session.flashbag.all %}
                     {% for flash in flashes %}
                         <div id="alert-box" class="alert alert-{{ type }}" >
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
                             {{ flash }}
                         </div>
                     {% endfor %}
@@ -46,13 +47,18 @@
             var alertBox = document.getElementById('alert-box');
             
             if (alertBox){
-
+                
+                var btn = alertBox.querySelector('.close');
+                btn.onclick = function(){
+                    alertBox.classList.add("fade-out");
+                }
+                
                 setTimeout(function(){
                     //alertBox.style.display = 'none';
                    // alertBox.classList.remove("visible");
                     alertBox.classList.add("fade-out");
                     //alertBox.className += 'hidden';
-                }, 3000);
+                }, 5000);
                 /*
                  var s = alertBox.style;
                  s.opacity = 1;
