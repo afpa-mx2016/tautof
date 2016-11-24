@@ -25,7 +25,10 @@ class DefaultController extends Controller
         if ($request->get('submit')){
             if (!empty($makeId) || !empty($modelId)){
                 $adverts = $em->getRepository('AppBundle:Advert')->search($makeId, $modelId);
+            }else{
+                $request->getSession()->getFlashBag()->add('info', 'Please select at least a brand or model');
             }
+            
         }
         
         $models = NULL;

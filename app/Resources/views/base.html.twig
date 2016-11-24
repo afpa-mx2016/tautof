@@ -5,7 +5,7 @@
         <title>{% block title %}Tautof!{% endblock %}</title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+            <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -29,24 +29,34 @@
                 {% endif %}
             </div>
         </nav>
-            <div>
+           
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+         <div>
                {% for type, flashes in app.session.flashbag.all %}
                     {% for flash in flashes %}
-                        <div id="alert-box" class="alert alert-{{ type }} fade in">
+                        <div id="alert-box" class="alert alert-{{ type }}" >
                             {{ flash }}
                         </div>
                     {% endfor %}
                 {% endfor %}
             </div>
-        <div class="container">
-            {% block body %}{% endblock %}
-        </div>
         <script>
             var alertBox = document.getElementById('alert-box');
+            
             if (alertBox){
+
+                setTimeout(function(){
+                    //alertBox.style.display = 'none';
+                   // alertBox.classList.remove("visible");
+                    alertBox.classList.add("fade-out");
+                    //alertBox.className += 'hidden';
+                }, 3000);
+                /*
                  var s = alertBox.style;
                  s.opacity = 1;
-                (function fade(){(s.opacity-=.1)<0?s.display="none":setTimeout(fade,800)})();
+                (function fade(){(s.opacity-=.1)<0?s.display="none":setTimeout(fade,800)})();*/
             }
            
         </script>
