@@ -22,8 +22,10 @@ class DefaultController extends Controller
         $modelId = $request->get('model');
         
         $adverts = NULL;
-        if (!empty($makeId) || !empty($modelId)){
-            $adverts = $em->getRepository('AppBundle:Advert')->search($makeId, $modelId);
+        if ($request->get('submit')){
+            if (!empty($makeId) || !empty($modelId)){
+                $adverts = $em->getRepository('AppBundle:Advert')->search($makeId, $modelId);
+            }
         }
         
         $models = NULL;
