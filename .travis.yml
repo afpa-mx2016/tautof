@@ -1,6 +1,12 @@
 php:
     - 7.0
 
+services:
+    - mysql
+
+before_install:
+    - composer self-update    
+
 before_script:
   - composer install
   - php app/console doctrine:database:create --env=test
