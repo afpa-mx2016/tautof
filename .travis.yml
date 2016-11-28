@@ -8,7 +8,8 @@ services:
     - mysql
 
 before_install:
-    - composer self-update    
+    - composer self-update
+    - mysql -u root -e 'create database testdbtautof;'
 
 before_script:
   - composer install
