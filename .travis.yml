@@ -15,7 +15,8 @@ before_script:
   - composer install
 
 script:
-  - phpunit --configuration phpunit.xml
+  - cd $TRAVIS_BUILD_DIR
+  - phpunit
 
 notifications:
   email:
