@@ -20,7 +20,7 @@ class DefaultControllerTest extends WebTestCase
         $container = $client->getContainer();
 
         $em = $container->get('doctrine')->getManager();
-        /*
+        
         //purge db
         $schemaTool = new SchemaTool($em);
         $metadata = $em->getMetadataFactory()->getAllMetadata();
@@ -59,7 +59,7 @@ class DefaultControllerTest extends WebTestCase
         $advert->setTitle('Vends super titine');
         $em->persist($advert);
         $em->flush();
-        */
+        
         
     }
     public function testIndex()
@@ -155,7 +155,7 @@ class DefaultControllerTest extends WebTestCase
         $homePage = $client->followRedirect();
         
         //should be connected
-        var_dump($homePage->filter('nav div .navbar-right')->text());
+        //var_dump($homePage->filter('nav div .navbar-right')->text());
         $this->assertContains('Hi! admin', $homePage->filter('nav div .navbar-right')->text());
             
     }
