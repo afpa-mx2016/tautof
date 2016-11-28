@@ -11,8 +11,7 @@ before_script:
   - mysql -u root -e 'create database testdbtautof;'
   - composer install
 
-script:
-  - phpunit
+script: phpunit --coverage-text
 
 notifications:
   email:
