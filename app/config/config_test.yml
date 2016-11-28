@@ -19,4 +19,4 @@ doctrine:
         host:     localhost
         dbname:   testdbtautof
         user:     root
-        password: admin
+        password:
