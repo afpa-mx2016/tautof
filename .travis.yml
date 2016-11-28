@@ -1,17 +1,14 @@
-language:
-    php
+language: php
 
 php:
-    - 7.0
+    - 5.6
 
 services:
     - mysql
 
-before_install:
-    - composer self-update
-    - mysql -u root -e 'create database testdbtautof;'
-
 before_script:
+  - composer self-update
+  - mysql -u root -e 'create database testdbtautof;'
   - composer install
 
 script:
