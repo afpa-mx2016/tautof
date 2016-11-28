@@ -12,7 +12,6 @@ before_script:
   - composer install
 
 script:
-    - pwd
     - phpunit --coverage-text
 
 notifications:
