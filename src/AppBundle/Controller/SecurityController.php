@@ -30,6 +30,13 @@ class SecurityController extends Controller
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        
+        if ($error){
+            $this->addFlash(
+                   'warning',
+                   strtr($error->getMessageKey(), $error->getMessageData())
+               );
+        }
 
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,

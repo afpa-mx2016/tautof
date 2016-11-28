@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\DataFixtures;
+namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -10,7 +10,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @author lionel
  */
-class SQLFixtures extends AbstractFixture implements OrderedFixtureInterface
+class SQLInitFixtures extends AbstractFixture implements OrderedFixtureInterface
 {    
   
 
@@ -18,7 +18,7 @@ class SQLFixtures extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager) {
       $filename = './app/Resources/tautof.sql';
       $sql = file_get_contents($filename);  // Read file contents
-      $manager->getConnection()->exec($sql);  // Execute native SQL
+      $manager->getConnection()->exec($sql);  // Execute native SQLtestdb
 
       $manager->flush();
     }
