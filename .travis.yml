@@ -8,7 +8,7 @@ before_script:
   - php app/console doctrine:fixtures:load -n --env=test
 
 script:
-  - phpunit -c app
+  - phpunit
 
 notifications:
   email:
