@@ -16,5 +16,5 @@ practical exercice with Symfony FW, release of an advert app.
  `composer install`
  - create a database 
  - copy `app/config/parameters.dist.yml` to `app/config/parameters.yml`and change your custom settings
- - import initial sql file: `php bin/console doctrine:fixtures:load --append`
+ - import initial sql file: `php bin/console doctrine:fixtures:load --append --fixtures=src/AppBundle/DataFixtures/ORM/init`
 
