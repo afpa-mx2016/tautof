@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\DataFixtures\ORM;
+namespace AppBundle\DataFixtures\ORM\init;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -10,7 +10,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @author lionel
  */
-class SQLInitFixtures extends AbstractFixture implements OrderedFixtureInterface
+class InitFixtures extends AbstractFixture implements OrderedFixtureInterface
 {    
   
 

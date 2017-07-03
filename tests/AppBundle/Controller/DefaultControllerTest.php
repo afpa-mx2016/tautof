@@ -2,10 +2,9 @@
 
 namespace Tests\AppBundle\Controller;
 
-use AppBundle\DataFixtures\ORM\SQLInitFixtures as SQLfixtures;
+use AppBundle\DataFixtures\ORM\init\InitFixtures as SQLfixtures;
 use AppBundle\Entity\Advert;
 use AppBundle\Entity\User;
-use AppBundle\Entity\Model;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
